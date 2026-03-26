@@ -426,6 +426,6 @@ function restartGame() {
   document.getElementById('gameover-screen').classList.add('hidden');
   document.getElementById('victory-screen').classList.add('hidden');
 
-  // On relance la boucle de jeu
+  // On relance la boucle de jeu dungeon
   gameLoop();
 }
