@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon Crawler - Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="game-wrapper">
+
+    <!-- HUD (heads up display) = infos du jeu en haut -->
+    <div id="hud">
+      <div id="hud-left">
+        <span>❤️ <span id="health-value">3</span></span>
+        <span>⚔️ Score: <span id="score-value">0</span></span>
+      </div>
+      <div id="hud-right">
+        <span id="level-value">Level 1</span>
+      </div>
+    </div>
+
+    <!-- CANVAS = la zone de jeu -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- GAME OVER SCREEN -->
+    <div id="gameover-screen" class="hidden">
+      <h1>💀 Game Over</h1>
+      <p>Your legend ends here...</p>
+      <button class="btn" onclick="restartGame()">Try Again</button>
+      <button class="btn btn-outline" onclick="goToDashboard()">Back to Dashboard</button>
+    </div>
+
+    <!-- VICTORY SCREEN -->
+    <div id="victory-screen" class="hidden">
+      <h1>🏆 Victory!</h1>
+      <p>The dungeon has been conquered!</p>
+      <button class="btn" onclick="restartGame()">Play Again</button>
+      <button class="btn btn-outline" onclick="goToDashboard()">Back to Dashboard</button>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

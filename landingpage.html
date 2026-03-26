@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon Crawler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- MAIN CARD -->
+    <div class="form-container landing-container">
+
+      <!-- LOGO -->
+      <div class="logo-box">
+        <h1 class="game-title">Dungeon</h1>
+        <h1 class="game-title accent">Crawler</h1>
+        <p class="game-tagline">⚔️ Enter if you dare ⚔️</p>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="landing-buttons">
+        <button class="btn" onclick="goToLogin()">▶ Play</button>
+        <button class="btn btn-outline" onclick="toggleHowToPlay()">📜 How To Play</button>
+      </div>
+
+    </div>
+
+    <!-- HOW TO PLAY CARD (separate, hidden at first) -->
+    <div class="form-container how-to-play hidden" id="how-to-play">
+      <h2>How To Play</h2>
+      <ul>
+        <li>⚔️ Move your hero using arrow keys</li>
+        <li>🧱 Navigate through the dungeon rooms</li>
+        <li>👹 Defeat enemies to earn gold</li>
+        <li>🗝️ Find the key to unlock the next level</li>
+        <li>💀 Don't let your health reach zero</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Crimson+Text:ital,wght@0,400;1,400&display=swap');
+/* loads two fonts Cinzel Decorative for titles (royal/gothic)
+ and Crimson Text for body text (old manuscript feel).*/
+/*Base reset + background*/
+* {
+  margin: 0;/*Creates space outside an element, between it and other elements.*/
+  padding: 0;/*Creates space inside the element, between the content and the border.*/
+  box-sizing: border-box;/*makes it so when you set a width, padding doesn't add extra size to it and Without this, boxes can accidentally overflow and break your layout*/
+}
+body { 
+  /*Targets the entire page*/
+  min-height: 100vh;/*makes the page at least as tall as the screen and vh means "viewport height" which is just a fancy word for screen height*/
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at top, #1a0a00 0%, #0a0a0a 70%);
+  /*adds a subtle warm glow at the top of the page, like a torch lighting the ceiling of a dungeon*/
+  display: flex;/*turns on flexbox, which is a tool that helps you position things easily*/
+  justify-content: center;/*centers everything left and right,Works only with display: flex or display: grid.*/
+  align-items: center;/*Aligns items vertically,Works with display like  flex or grid*/
+  font-family: 'Crimson Text', serif;/*Defines the font of the text.*/
+  overflow: auto ;/*Controls what happens when content is bigger than the element.*/
+}
+#app {
+    /* # est pour styling de div d'id app */
+  position: relative;
+  width: 100%;/*FULL AVAILABLE WIDTH*/
+  max-width: 460px;
+  padding: 20px;/*the card doesn't touch the screen edges*/
+}
+.form-container {
+  /*styling de la class*/
+  background: linear-gradient(160deg, #111008, #0d0d0d);
+  /*diagonal gradient from a dark warm brown to pure black. Gives the card depth*/
+  border: 1px solid #7a5c1e;
+  /*thin gold border around the card : 1px is the thickness,solid is the style,#7a5c1e is a dark gold color*/
+  border-radius: 4px;/*corners very slightly rounded*/
+  padding: 50px 40px;
+  /*space inside the card. 50px top and bottom, 40px left and right*/
+  box-shadow: 0 0 60px rgba(180, 120, 20, 0.15), inset 0 0 40px rgba(0,0,0,0.6);
+/*soft golden glow around the outside of the card*/
+/*inset:the shadow is inside the card*/
+}
+/*Title styling*/
+.form-container h1 { /*CLASS FORM CONTAINER*/
+  font-family: 'Cinzel Decorative', cursive;
+  color: #c9a84c;
+  font-size: 1.6rem;/*rem is better on different screens*/
+  text-align: center;
+  margin-bottom: 8px;/*small gap below the title before the subtitle*/
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.6);
+}
+.form-container p.subtitle { /*p tag that has class that's called inside the 
+  form container*/
+  text-align: center;
+  color: #6b5a3a;
+  font-size: 1rem;
+  margin-bottom: 35px;
+  font-style: italic;
+}
+.input-group {/*Targets the div that wraps each label and input together*/
+  margin-bottom: 20px;/*gap between each input field */
+}
+
+.input-group label { /*targets the label inside each input group*/
+  display: block;
+/* forces the label to take up its own full line so the input appears below it, not next to it*/
+  color: #a08040;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.input-group input {/*targets the actual typing box inside each input group*/
+  width: 100%;
+  background: #0a0a08;
+  border: 1px solid #3d2e10;
+  border-radius: 3px;
+  padding: 12px 16px;
+  color: #e8d9b0;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+/*makes the border and glow smoothly animate when 
+the user clicks on the input instead of snapping instantly*/
+  outline: none;
+}
+.input-group input:focus {
+/*focus is when the user clicks on the input*/
+  border-color: #c9a84c;
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
+}
+.btn {/*targets everything with class button*/
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #7a5c1e, #c9a84c, #7a5c1e);
+  border: none;
+  border-radius: 3px;
+  color: #0a0a0a;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.3s, box-shadow 0.3s;
+}
+.btn:hover {/*when the mouse is over the button*/
+  opacity: 0.85;/*slight see through when it gets clicked on*/
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+}
+.toggle-text {/*targets the paragraph at the bottom that says
+   "No account? Create one"*/
+  text-align: center;
+  margin-top: 25px;/*adds a gap above it so it doesn't 
+  sit too close to the button*/
+  color: #6b5a3a;
+  font-size: 0.95rem;
+}
+.toggle-text span {
+  /*targets the clickable word inside the toggle text,"Create one"*/
+  color: #c9a84c;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;/*makes the color change smoothly when hovered*/
+}
+.toggle-text span:hover {
+  /*when mouse is over the clickable word*/
+  color: #f0d080;
+}
+.error-msg {
+/*this styles the error messages JavaScript will show when something goes wrong*/
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.success-msg {
+/*styles the success message JavaScript shows when login or signup works*/
+  color: #c9a84c;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+}
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.logo-box {
+  text-align: center;
+}
+
+.game-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 3rem;
+  color: #c9a84c;
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.7);
+  line-height: 1.2;
+  letter-spacing: 4px;
+}
+
+.game-title.accent {
+  color: #fff5e0;
+  text-shadow: 0 0 40px rgba(255, 200, 100, 0.5);
+}
+
+.game-tagline {
+  color: #a08040;
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  letter-spacing: 2px;
+}
+
+.landing-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.btn-outline {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid #7a5c1e;
+  border-radius: 3px;
+  color: #c9a84c;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn-outline:hover {
+  background: rgba(201, 168, 76, 0.1);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+}
+
+.how-to-play h2 {
+  font-family: 'Cinzel Decorative', cursive;
+  color: #c9a84c;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(201, 168, 76, 0.5);
+}
+
+.how-to-play ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.how-to-play ul li {
+  color: #e8d9b0;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #2a1f0a;
+  padding-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+/* ========== DASHBOARD ========== */
+
+#dashboard {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* WELCOME BANNER */
+.welcome-banner {
+  background: linear-gradient(160deg, #111008, #0d0d0d);
+  border: 1px solid #7a5c1e;
+  border-radius: 4px;
+  padding: 25px 40px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(180, 120, 20, 0.15);
+}
+
+.welcome-title {
+  font-family: 'Cinzel Decorative', cursive;
+  color: #c9a84c;
+  font-size: 2rem;
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.6);
+}
+
+.welcome-sub {
+  color: #6b5a3a;
+  font-style: italic;
+  font-size: 1rem;
+  margin-top: 6px;
+}
+
+/* GRID LAYOUT */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* EACH CARD */
+.dash-card {
+  background: linear-gradient(160deg, #111008, #0d0d0d);
+  border: 1px solid #7a5c1e;
+  border-radius: 4px;
+  padding: 25px;
+  box-shadow: 0 0 40px rgba(180, 120, 20, 0.1);
+}
+
+.dash-card-title {
+  font-family: 'Cinzel Decorative', cursive;
+  color: #c9a84c;
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
+  border-bottom: 1px solid #3d2e10;
+  padding-bottom: 12px;
+}
+
+/* AVATAR GRID */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.avatar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid #3d2e10;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.avatar-item p {
+  color: #a08040;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.avatar-emoji {
+  font-size: 2rem;
+}
+
+.avatar-item:hover {
+  border-color: #c9a84c;
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
+}
+
+.avatar-item.active {
+  border-color: #c9a84c;
+  box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+  background: rgba(201, 168, 76, 0.05);
+}
+
+.avatar-item.active p {
+  color: #c9a84c;
+}
+
+/* ADVENTURE LOG */
+.adventure-log {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adventure-log li {
+  color: #e8d9b0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #2a1f0a;
+  padding-bottom: 8px;
+}
+
+/* QUEST LIST */
+.quest-label {
+  color: #6b5a3a;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.quest-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quest-list li {
+  color: #e8d9b0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #2a1f0a;
+  padding-bottom: 10px;
+}
+
+/* RESOURCES */
+.resources-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resources-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #e8d9b0;
+  font-size: 1rem;
+  border-bottom: 1px solid #2a1f0a;
+  padding-bottom: 12px;
+}
+
+.resource-icon {
+  font-size: 1.5rem;
+}
+
+.resource-value {
+  color: #c9a84c;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.1rem;
+}
+/* scroll for dashboard */
+#dashboard {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+/* ========== EYE ICON ========== */
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  user-select: none;
+}
+
+.eye-icon:hover {
+  opacity: 1;
+}
+/* ========== GAME PAGE ========== */
+
+/* Le wrapper qui contient tout le jeu
+   position relative permet de placer les écrans game over
+   et victory par dessus le canvas */
+#game-wrapper {
+  position: relative;
+  width: 800px; /* largeur fixe du jeu */
+  height: 400px; /* hauteur fixe du jeu */
+  border: 2px solid #7a5c1e; /* bordure dorée comme les autres pages */
+  border-radius: 4px;
+  overflow: hidden; /* cache tout ce qui dépasse du cadre */
+  box-shadow: 0 0 60px rgba(180, 120, 20, 0.3); /* lueur dorée autour */
+}
+
+/* Le canvas est la feuille blanche où JavaScript dessine tout
+   le jeu : le joueur, les ennemis, le sol, le fond */
+#game-canvas {
+  display: block; /* enlève l'espace blanc par défaut sous le canvas */
+  width: 800px;
+  height: 400px;
+  background: #0a0a0a; /* fond noir comme le reste du jeu */
+}
+
+/* HUD = Heads Up Display
+   C'est la barre d'infos en haut du jeu
+   display flex permet de mettre les infos à gauche et à droite */
+#hud {
+  position: absolute; /* flotte par dessus le canvas */
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* hud-left à gauche, hud-right à droite */
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7); /* fond noir semi transparent */
+  border-bottom: 1px solid #3d2e10; /* ligne dorée sous le hud */
+  z-index: 10; /* s'affiche par dessus tout le reste */
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 0.75rem;
+  color: #c9a84c; /* texte doré */
+  letter-spacing: 1px;
+}
+
+/* Côté gauche du HUD : vie et score
+   gap ajoute de l'espace entre les deux */
+#hud-left {
+  display: flex;
+  gap: 20px;
+}
+
+/* Côté droit du HUD : niveau actuel */
+#hud-right {
+  color: #a08040; /* doré plus foncé pour différencier */
+}
+
+/* Ecran Game Over et Victory
+   position absolute les place par dessus le canvas
+   display flex les centre parfaitement */
+#gameover-screen,
+#victory-screen {
+  position: absolute; /* par dessus le canvas */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85); /* fond noir transparent */
+  display: flex;
+  flex-direction: column; /* empile les éléments verticalement */
+  justify-content: center; /* centre verticalement */
+  align-items: center; /* centre horizontalement */
+  gap: 15px;
+  z-index: 20; /* par dessus le HUD aussi */
+}
+
+/* Titre Game Over et Victory */
+#gameover-screen h1,
+#victory-screen h1 {
+  font-family: 'Cinzel Decorative', cursive;
+  color: #c9a84c;
+  font-size: 2rem;
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.8);
+}
+
+/* Sous titre Game Over et Victory */
+#gameover-screen p,
+#victory-screen p {
+  color: #6b5a3a;
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Les boutons sur les écrans game over et victory
+   on réduit la largeur car ils sont côte à côte */
+#gameover-screen .btn,
+#victory-screen .btn,
+#gameover-screen .btn-outline,
+#victory-screen .btn-outline {
+  width: 200px; /* largeur fixe au lieu de 100% */
+}

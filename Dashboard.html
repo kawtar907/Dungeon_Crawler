@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon Crawler - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="dashboard">
+
+    <!-- WELCOME BANNER -->
+    <div class="welcome-banner">
+      <h1 class="welcome-title">⚔️ Welcome, <span id= "player-name">Hero</span>!</h1>
+      <p class="welcome-sub">Your legend continues...</p>
+    </div>
+    <!-- MAIN GRID -->
+    <div class="dashboard-grid">
+
+      <!-- AVATAR SELECTION -->
+      <div class="dash-card" id="avatar-card">
+        <h2 class="dash-card-title">Avatar Selection</h2>
+        <div class="avatar-grid">
+          <div class="avatar-item active" onclick="selectAvatar(this)">
+            <div class="avatar-emoji">🧙</div>
+            <p>Mage</p>
+          </div>
+          <div class="avatar-item" onclick="selectAvatar(this)">
+            <div class="avatar-emoji">⚔️</div>
+            <p>Warrior</p>
+          </div>
+          <div class="avatar-item" onclick="selectAvatar(this)">
+            <div class="avatar-emoji">🏹</div>
+            <p>Archer</p>
+          </div>
+          <div class="avatar-item" onclick="selectAvatar(this)">
+            <div class="avatar-emoji">🗡️</div>
+            <p>Rogue</p>
+          </div>
+          <div class="avatar-item" onclick="selectAvatar(this)">
+            <div class="avatar-emoji">🛡️</div>
+            <p>Knight</p>
+          </div>
+          <div class="avatar-item" onclick="selectAvatar(this)">
+            <div class="avatar-emoji">🧝</div>
+            <p>Elf</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADVENTURE LOG -->
+      <div class="dash-card" id="adventure-card">
+        <h2 class="dash-card-title">Adventure Log</h2>
+        <ul class="adventure-log">
+          <li>🗺️ You entered the Dark Forest...</li>
+          <li>👹 A goblin attacks! You survived.</li>
+          <li>🗝️ You found a rusty key.</li>
+          <li>💰 You collected 50 gold coins.</li>
+          <li>🚪 You unlocked the dungeon door.</li>
+        </ul>
+      </div>
+
+      <!-- QUEST LIST -->
+      <div class="dash-card" id="quest-card">
+        <h2 class="dash-card-title">Quest List</h2>
+        <p class="quest-label">Current Quests:</p>
+        <ul class="quest-list">
+          <li>⚔️ Clear the Forest Dungeon</li>
+          <li>🏺 Find the Ancient Artifact</li>
+          <li>🧪 Collect 3 Health Potions</li>
+        </ul>
+      </div>
+
+      <!-- RESOURCES -->
+      <div class="dash-card" id="resources-card">
+        <h2 class="dash-card-title">Resources</h2>
+        <ul class="resources-list">
+          <li><span class="resource-icon">🪙</span> <span class="resource-value">100</span> Gold</li>
+          <li><span class="resource-icon">📜</span> <span class="resource-value">5</span> Scrolls</li>
+          <li><span class="resource-icon">🧪</span> <span class="resource-value">2</span> Potions</li>
+          <li><span class="resource-icon">💀</span> <span class="resource-value">3</span> Kills</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+<script>
+  loadPlayerName();
+</script>
+</body>
+</html>
